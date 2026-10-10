@@ -1,0 +1,39 @@
+@model MvcCv.Models.Entity.TblEgitim
+@{
+    ViewBag.Title = "EgitimAdd";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<br />
+<br />
+<h3>Yeni Eðitim Ekleme Sayfasý</h3>
+
+<form method="post">
+    @Html.Label("Baþlýk (Okul Adý / Derece)")
+    @Html.TextBoxFor(x => x.Baslik, new { @class = "form-control", placeholder = "Örn: Lisans / Üniversite Adý" })
+    @Html.ValidationMessageFor(x => x.Baslik, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("Alt Baþlýk 1 (Fakülte / Bölüm)")
+    @Html.TextBoxFor(x => x.AltBaslik1, new { @class = "form-control", placeholder = "Örn: Mühendislik Fakültesi - Bilgisayar Mühendisliði" })
+    @Html.ValidationMessageFor(x => x.AltBaslik1, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("Alt Baþlýk 2 (Açýklama / Detay)")
+    @Html.TextBoxFor(x => x.AltBaslik2, new { @class = "form-control", placeholder = "Örn: Tez konusu veya ek açýklamalar" })
+    @Html.ValidationMessageFor(x => x.AltBaslik2, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("Genel Not Ortalamasý (GNO)")
+    @Html.TextBoxFor(x => x.GNO, new { @class = "form-control", placeholder = "Örn: 3.45" })
+    @Html.ValidationMessageFor(x => x.GNO, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("Tarih Aralýðý")
+    @Html.TextBoxFor(x => x.Tarih, new { @class = "form-control", placeholder = "Örn: 2018 - 2022" })
+    @Html.ValidationMessageFor(x => x.Tarih, "", new { @class = "text-danger" })
+    <br />
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>

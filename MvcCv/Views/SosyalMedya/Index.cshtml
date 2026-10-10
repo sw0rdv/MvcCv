@@ -1,0 +1,150 @@
+﻿@using MvcCv.Models.Entity
+@model List<TblSosyalMedya>
+
+@{
+    ViewBag.Title = "Sosyal Medya Hesapları";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card card-primary card-outline shadow-sm">
+    <div class="card-header d-flex align-items-center">
+        <h3 class="card-title mb-0">
+            <i class="fas fa-share-alt mr-2 text-primary"></i>Sosyal Medya Hesaplarım
+        </h3>
+        <div class="ml-auto">
+            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#Modal1">
+                <i class="fas fa-plus mr-1"></i> Yeni Hesap Ekle
+            </button>
+        </div>
+    </div>
+
+    <div class="card-body p-0">
+        <table class="table table-hover table-striped mb-0">
+            <thead class="thead-light">
+                <tr>
+                    <th style="width:60px;">#</th>
+                    <th style="width:60px;">İkon</th>
+                    <th>Sosyal Medya</th>
+                    <th>Link</th>
+                    <th>Durum</th>
+                    <th class="text-right" style="width:200px;">İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="align-middle"><span class="badge badge-secondary">@item.ID</span></td>
+                            <td class="align-middle text-center">
+                                <i class="@item.ikon fa-lg"></i>
+                            </td>
+                            <td class="align-middle font-weight-bold">@item.Ad</td>
+                            <td class="align-middle">
+                                <a href="@item.Link" target="_blank" class="text-truncate d-inline-block" style="max-width:250px;">
+                                    @item.Link
+                                </a>
+                            </td>
+                            <td class="align-middle">
+                                <span class="badge badge-info">@item.Durum</span>
+                            </td>
+                            <td class="text-right align-middle">
+                                <a class="btn btn-primary btn-sm" href="/SosyalMedya/SosyalMedyaGetir/@item.ID">
+                                    <i class="fas fa-pen mr-1"></i> Düzenle
+                                </a>
+                                <a class="btn btn-danger btn-sm" href="/SosyalMedya/SosyalMedyaSil/@item.ID"
+                                   onclick="return confirm('@item.Ad hesabını silmek istediğine emin misin?')">
+                                    <i class="fas fa-trash-alt mr-1"></i> Sil
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-4">
+                            <i class="fas fa-inbox fa-2x d-block mb-2"></i>
+                            Henüz sosyal medya hesabı eklenmemiş.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Ekleme Modalı -->
+<div class="modal fade" id="Modal1" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-plus-circle mr-2 text-success"></i>Yeni Sosyal Medya Hesabı</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <form method="post" action="/SosyalMedya/SosyalMedyaEkle">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Sosyal Medya Adı</label>
+                        <input type="text" name="Ad" class="form-control" placeholder="Örn: X, Instagram, GitHub" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Link</label>
+                        <input type="url" name="Link" class="form-control" placeholder="https://..." required />
+                    </div>
+                    <div class="form-group">
+                        <label>Durum</label>
+                        <input type="text" name="Durum" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>İkon</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="width:46px;justify-content:center;">
+                                    <i id="ikonOnizleme" class="fas fa-question"></i>
+                                </span>
+                            </div>
+                            <input type="text" id="ikonInput" name="ikon" class="form-control" placeholder="fab fa-x-twitter" />
+                        </div>
+                        <small class="text-muted d-block mt-2">Hızlı seç:</small>
+                        <div class="mt-1">
+                            <button type="button" class="btn btn-light btn-sm ikon-sec" data-ikon="fab fa-x-twitter"><i class="fab fa-x-twitter"></i></button>
+                            <button type="button" class="btn btn-light btn-sm ikon-sec" data-ikon="fab fa-instagram"><i class="fab fa-instagram"></i></button>
+                            <button type="button" class="btn btn-light btn-sm ikon-sec" data-ikon="fab fa-linkedin"><i class="fab fa-linkedin"></i></button>
+                            <button type="button" class="btn btn-light btn-sm ikon-sec" data-ikon="fab fa-github"><i class="fab fa-github"></i></button>
+                            <button type="button" class="btn btn-light btn-sm ikon-sec" data-ikon="fab fa-youtube"><i class="fab fa-youtube"></i></button>
+                            <button type="button" class="btn btn-light btn-sm ikon-sec" data-ikon="fab fa-facebook"><i class="fab fa-facebook"></i></button>
+                            <button type="button" class="btn btn-light btn-sm ikon-sec" data-ikon="fab fa-tiktok"><i class="fab fa-tiktok"></i></button>
+                            <button type="button" class="btn btn-light btn-sm ikon-sec" data-ikon="fab fa-discord"><i class="fab fa-discord"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                    <button type="submit" class="btn btn-success"><i class="fas fa-save mr-1"></i> Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var input = document.getElementById('ikonInput');
+        var onizleme = document.getElementById('ikonOnizleme');
+
+        function guncelle() {
+            onizleme.className = input.value.trim() || 'fas fa-question';
+        }
+
+        input.addEventListener('input', guncelle);
+
+        document.querySelectorAll('.ikon-sec').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                input.value = this.getAttribute('data-ikon');
+                guncelle();
+            });
+        });
+    });
+</script>

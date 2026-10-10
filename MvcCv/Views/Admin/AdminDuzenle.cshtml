@@ -1,0 +1,36 @@
+﻿@model MvcCv.Models.Entity.TblAdmin
+@{
+    ViewBag.Title = "Admin Düzenle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="pt-4"></div>
+
+<div class="card card-primary card-outline shadow-sm" style="max-width: 600px;">
+    <div class="card-header">
+        <h3 class="card-title"><i class="fas fa-user-edit mr-2 text-primary"></i>Admin Düzenle</h3>
+    </div>
+    <form method="post" action="/Admin/AdminGuncelle">
+        <input type="hidden" name="ID" value="@Model.ID" />
+        <div class="card-body">
+            <div class="form-group">
+                <label>Kullanıcı Adı</label>
+                <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-user"></i></span></div>
+                    <input type="text" name="KullaniciAdi" value="@Model.KullaniciAdi" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Yeni Şifre</label>
+                <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-lock"></i></span></div>
+                    <input type="password" name="Sifre" class="form-control" placeholder="Değiştirmek istemiyorsan boş bırak">
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-1"></i> Güncelle</button>
+            <a href="/Admin/Index/" class="btn btn-secondary"><i class="fas fa-arrow-left mr-1"></i> Geri</a>
+        </div>
+    </form>
+</div>

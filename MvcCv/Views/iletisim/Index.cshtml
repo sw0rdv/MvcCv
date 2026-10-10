@@ -1,0 +1,63 @@
+﻿@using MvcCv.Models.Entity
+@model List<Tbliletisim>
+
+@{
+    ViewBag.Title = "İletişim Mesajları";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header p-2">
+                            <h3 class="card-title">Gelen Mesajlar</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-pane" id="timeline">
+                                <div class="timeline timeline-inverse">
+                                    @foreach (var item in Model)
+                                    {
+                                        <!-- Zaman etiketi -->
+                                        <div class="time-label">
+                                            <span class="bg-success">
+                                                @(item.Tarih.HasValue ? item.Tarih.Value.ToString("dd.MM.yyyy") : item.Tarih.ToString())
+                                            </span>
+                                        </div>
+
+                                        <!-- Mesaj kutusu -->
+                                        <div>
+                                            <i class="fas fa-envelope bg-primary"></i>
+                                            <div class="timeline-item">
+                                                <span class="time">
+                                                    <i class="far fa-clock"></i> @item.Mail
+                                                </span>
+
+                                                <h3 class="timeline-header">
+                                                    <strong>@item.AdSoyad</strong> — @item.Konu
+                                                </h3>
+
+                                                <div class="timeline-body">
+                                                    @item.Mesaj
+                                                </div>
+
+                                                <div class="timeline-footer">
+                                                    <a href="/iletisim/MesajSil/@item.ID" class="btn btn-danger btn-sm" onclick="return confirm('Bu mesajı silmek istediğinize emin misiniz?');">Sil</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div><!-- /.card-body -->
+                    </div><!-- /.card -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+</body>
+</html>

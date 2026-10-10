@@ -1,0 +1,64 @@
+﻿@model MvcCv.Models.Entity.TblHakkimda
+
+@{
+    ViewBag.Title = "Hakkımda Düzenle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<section class="content">
+    <div class="container-fluid">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Hakkımda Bilgileri Düzenleme</h3>
+            </div>
+
+            <form method="post">
+                <div class="card-body">
+                    @Html.HiddenFor(x => x.ID)
+
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>Ad</label>
+                            @Html.TextBoxFor(x => x.Ad, new { @class = "form-control", placeholder = "Adınız" })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Soyad</label>
+                            @Html.TextBoxFor(x => x.Soyad, new { @class = "form-control", placeholder = "Soyadınız" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>Telefon</label>
+                            @Html.TextBoxFor(x => x.Telefon, new { @class = "form-control", placeholder = "05XX XXX XX XX" })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>E-Posta</label>
+                            @Html.TextBoxFor(x => x.Mail, new { @class = "form-control", type = "email", placeholder = "ornek@mail.com" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Adres</label>
+                        @Html.TextBoxFor(x => x.Adres, new { @class = "form-control", placeholder = "İlçe / Şehir / Ülke" })
+                    </div>
+
+                    <div class="form-group">
+                        <label>Profil / Resim Yolu (URL)</label>
+                        @Html.TextBoxFor(x => x.Resim, new { @class = "form-control", placeholder = "/tema/dist/img/foto.jpg veya Web URL" })
+                    </div>
+
+                    <div class="form-group">
+                        <label>Hakkımda Özeti (Açıklama)</label>
+                        @Html.TextAreaFor(x => x.Aciklama, new { @class = "form-control", rows = "6", placeholder = "Kendinizi anlatan özet metni buraya yazın..." })
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-success">Değişiklikleri Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

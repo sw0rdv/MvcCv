@@ -1,0 +1,40 @@
+﻿@model MvcCv.Models.Entity.TblHobilerim
+
+@{
+    ViewBag.Title = "Hobilerim Düzenle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<section class="content">
+    <div class="container-fluid">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Hobilerim ve İlgi Alanları Düzenleme</h3>
+            </div>
+
+            <form method="post">
+                <div class="card-body">
+                    <!-- ID bilgisini gizli olarak taşıyoruz -->
+                    @Html.HiddenFor(x => x.ID)
+
+                    <div class="form-group">
+                        <label>Açıklama 1 (Üst Taraf)</label>
+                        @Html.TextAreaFor(x => x.Aciklama1, new { @class = "form-control", rows = "5", placeholder = "Birinci açıklama metnini girin..." })
+                    </div>
+
+                    <br />
+
+                    <div class="form-group">
+                        <label>Açıklama 2 (Alt Taraf)</label>
+                        @Html.TextAreaFor(x => x.Aciklama2, new { @class = "form-control", rows = "5", placeholder = "İkinci açıklama metnini girin..." })
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-success">Değişiklikleri Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
